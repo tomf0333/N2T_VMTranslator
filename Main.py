@@ -959,8 +959,8 @@ def main():
             if filename.endswith(".vm"):
                 list_of_files.append(
                     os.path.join(os.path.normpath(st), filename))
-    # bootstrap = make_boot()
-    # bootstrap.extend(convert_call("Sys.init", 0, 0))
+    bootstrap = make_boot()
+    bootstrap.extend(convert_call("Sys.init", 0, 0))
     converted_lines = list()
     if is_directory:
         for file_name in list_of_files:
@@ -970,9 +970,9 @@ def main():
             converted_lines += convert_lines(new_lines, base_name + ".")
         write_file = os.path.join(st, dir_name + ".asm")
         with open(write_file, "w") as file:
-            # for line in bootstrap:
-            #     file.write(line)
-            #     file.write("\r\n")
+            for line in bootstrap:
+                file.write(line)
+                file.write("\r\n")
             for line in converted_lines:
                 file.write(line)
                 file.write("\r\n")
@@ -983,9 +983,9 @@ def main():
         converted_lines = convert_lines(new_lines, st_norm + ".")
         write_file = os.path.join(os.path.dirname(st), Path(st).stem + ".asm")
         with open(write_file, "w") as file:
-            # for line in bootstrap:
-            #     file.write(line)
-            #     file.write("\r\n")
+            for line in bootstrap:
+                file.write(line)
+                file.write("\r\n")
             for line in converted_lines:
                 file.write(line)
                 file.write("\r\n")
